@@ -33,16 +33,24 @@ def open_new_window():
         label.image = img
 
 
+def random_new_window():
+    img = load_image(url)
+    if img:
+        new_window = Toplevel()
+        new_window.title('Картинка с котиками')
+        new_window.geometry('700x500')
+        label = Label(new_window, image=img)
+        label.pack()
+        label.image = img
+
+
+
 def exit():
     window.destroy()
 
 window = Tk()
 window.title('Cats!')
 window.geometry('250x150')
-
-
-tag_entry = Entry()
-tag_entry.pack()
 
 
 menu_bar = Menu(window)
@@ -56,11 +64,14 @@ file_menu.add_command(label='Выход', command=exit)
 url = "https://cataas.com/cat"
 
 tag_label = Label(text='Выберите тэг')
+tag_label.pack()
 
 tag_combobox = ttk.Combobox(values=Allowed_tags)
-tag_combobox.pack()
+tag_combobox.pack(pady=10)
 
 load_button = Button(text='Загрузить по тегу', command=open_new_window)
-load_button.pack()
+load_button.pack(pady=5)
+random_button = Button(text='Случайный котик', command=random_new_window)
+random_button.pack()
 
 window.mainloop()
